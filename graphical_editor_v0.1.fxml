@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="545.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="239.0" layoutY="233.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <SplitPane dividerPositions="0.1279926335174954" orientation="VERTICAL" prefHeight="545.0" prefWidth="776.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <HBox layoutX="34.0" layoutY="24.0" />
+                        <VBox layoutX="387.0" layoutY="41.0" />
+                        <VBox layoutX="34.0" layoutY="12.0">
+                           <children>
+                              <Label text="Input" />
+                              <TextField prefHeight="25.0" prefWidth="186.0" promptText="Enter relations here e.g. R(A,B,C)" />
+                           </children>
+                        </VBox>
+                        <Button layoutX="265.0" layoutY="28.0" mnemonicParsing="false" text="Generate SQL Query" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <SplitPane dividerPositions="0.07901554404145078, 0.8238341968911918" layoutX="-1.0" prefHeight="455.0" prefWidth="774.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="52.0">
+                                 <children>
+                                    <VBox prefHeight="453.0" prefWidth="58.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label text="Operators" />
+                                          <StackPane prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="σ" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="π" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="ρ" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="τ" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="δ" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="γ" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="103.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="X" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="141.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="-" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∪" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∩" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane layoutX="10.0" layoutY="331.0" prefHeight="38.0" prefWidth="58.0">
+                                             <children>
+                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="⋈" textAlignment="CENTER" textOverrun="CLIP" />
+                                             </children>
+                                          </StackPane>
+                                          <StackPane prefHeight="38.0" prefWidth="58.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="405.0">
+                                 <children>
+                                    <ScrollPane layoutX="106.0" layoutY="27.0" prefHeight="453.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="467.0" prefWidth="557.0">
+                                             <children>
+                                                <VBox layoutX="121.0" layoutY="57.0" prefHeight="468.0" prefWidth="557.0" AnchorPane.bottomAnchor="-27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <SplitPane dividerPositions="0.6388888888888888" orientation="VERTICAL" prefHeight="452.0" prefWidth="568.0">
+                                                   <items>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="566.0">
+                                                         <children>
+                                                            <StackPane prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;">
+                                                               <children>
+                                                                  <Circle fill="#1f93ff00" radius="14.0" stroke="BLACK" strokeType="INSIDE" translateX="-55.0" />
+                                                                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="150.0" promptText="Operands" translateX="55.0" />
+                                                                  <Label text="Click the circle, then choose operators" translateX="-180.0" />
+                                                               </children>
+                                                            </StackPane>
+                                                            <Separator layoutY="37.0" prefHeight="2.0" prefWidth="568.0" />
+                                                            <StackPane layoutY="40.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;">
+                                                               <children>
+                                                                  <SplitPane dividerPositions="0.4991166077738516" prefHeight="160.0" prefWidth="200.0">
+                                                                    <items>
+                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                           <children>
+                                                                              <Circle fill="#1f93ff00" layoutX="71.0" layoutY="18.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                                                                              <TextField layoutX="100.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="150.0" promptText="Operands" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                           <children>
+                                                                              <Circle fill="#1f93ff00" layoutX="51.0" layoutY="17.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                                                                              <TextField layoutX="77.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="150.0" promptText="Operands" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                    </items>
+                                                                  </SplitPane>
+                                                               </children>
+                                                            </StackPane>
+                                                            <Separator layoutY="77.0" prefHeight="2.0" prefWidth="568.0" />
+                                                            <StackPane layoutX="-1.0" layoutY="80.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
+                                                            <Separator layoutX="-1.0" layoutY="117.0" prefHeight="2.0" prefWidth="568.0" />
+                                                            <StackPane layoutX="-1.0" layoutY="120.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
+                                                            <Separator layoutX="-1.0" layoutY="157.0" prefHeight="2.0" prefWidth="568.0" />
+                                                            <StackPane layoutY="160.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
+                                                            <Separator layoutY="197.0" prefHeight="2.0" prefWidth="568.0" />
+                                                            <StackPane layoutY="200.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
+                                                            <Separator layoutY="237.0" prefHeight="2.0" prefWidth="568.0" />
+                                                            <StackPane layoutX="-1.0" layoutY="240.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
+                                                            <Separator layoutX="-1.0" layoutY="277.0" prefHeight="2.0" prefWidth="568.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="141.0" prefWidth="566.0">
+                                                         <children>
+                                                            <VBox prefHeight="162.0" prefWidth="568.0">
+                                                               <children>
+                                                                  <Label text="SQL Output" />
+                                                                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </items>
+                                                </SplitPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="453.0" prefWidth="92.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Relations" />
+                                          <ListView prefHeight="437.0" prefWidth="133.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
