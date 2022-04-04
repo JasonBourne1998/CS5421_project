@@ -1,6 +1,9 @@
 package graphical.editor.LinAlgTree;
 
+import graphical.editor.DuplicateColumnException;
 import graphical.editor.Operator;
+
+import java.util.Arrays;
 
 public class UnaryOperation implements Node {
     private Node operand;
@@ -9,73 +12,130 @@ public class UnaryOperation implements Node {
     private String[] attributes;
 
     public UnaryOperation(Operator op, String[] args) {
-        this.operator = op;
+        operator = op;
         params = args;
     }
 
     public UnaryOperation(Operator op, Node node, String[] args) throws Exception {
-        this.operator = op;
-        operand = node.evaluate();
+        operator = op;
+        operand = node;
         params = args;
+        evaluate();
     }
 
-    public Node evaluate() throws Exception {
+    public void evaluate() throws Exception {
         switch (operator) {
-        case IDENTITY:
-            return operand;
         case PI:
-            return project(operand, params);
+            if (Parser.detectAggregateFunctions(params)) {
+                Node groupBy = locateGroupBy();
+            } else {
+                project(operand, params);
+            }
+            break;
         case RHO:
-            return rename(operand, params);
-        //TODO case SIGMA, case TAU, case GAMMA, case DELTA
+            if (params.length == 1 && params[0].matches("[A-Za-z0-9_]+")) {
+                renameTable(operand, params[0]);
+            }
+            renameEach(operand, params);
+            break;
+        case DELTA:
+            duplicateElimination(operand);
+            break;
+        case SIGMA:
+            if (Parser.detectAggregateFunctions(params)) {
+                Node groupBy = locateGroupBy();
+                //TODO HAVING clause
+            } else {
+                //TODO WHERE clause
+            }
+            break;
+        case TAU:
+            orderBy(operand, params);
+            break;
+        //TODO case SIGMA, case GAMMA
         }
         throw new Exception("Invalid operator.");
     }
 
-    private Node project(Node operand, String[] params) throws Exception {
+
+    private boolean checkAttributesPresent(Node operand, String[] params) {
         String[] relAttrs = operand.getAttributes();
-        boolean isPresent;
-        for (String attr : params) {
-            isPresent = false;
-            for (String attr2 : relAttrs) {
-                if (attr.compareToIgnoreCase(attr2) == 0) {
-                    isPresent = true;
-                    break;
-                }
-            }
-            if (!isPresent) {
-                throw new Exception("Projected attribute(s) not present in operand relation.");
-            }
-        }
-        operand.setAttributes(params);
-        return operand;
+        return Arrays.stream(params)
+                .allMatch(param -> Arrays.stream(relAttrs).anyMatch(relAttr -> relAttr.equalsIgnoreCase(param)));
     }
 
-    private Node rename(Node operand, String[] params) throws Exception {
+    private void project(Node operand, String[] params) throws Exception {
+        if (!checkAttributesPresent(operand, params)) {
+            throw new Exception("Attributes not present in the schema.");
+        }
+        attributes = params;
+    }
+
+    private void orderBy(Node operand, String[] params) throws Exception {
+        if (!checkAttributesPresent(operand, params)) {
+            throw new Exception("Attributes not present in the schema.");
+        }
+    }
+
+    private void renameTable(Node operand, String tableName) throws DuplicateColumnException {
+        String[] originalAttributes = operand.getAttributes();
+        String[] newAttributes = Arrays.stream(originalAttributes)
+                .map(attr -> String.format("%s.%s", tableName, attr.split("\\.")[1]))
+                .distinct()
+                .toArray(String[]::new);
+        if (originalAttributes.length > newAttributes.length) {
+            throw new DuplicateColumnException();
+        }
+        setAttributes(newAttributes);
+    }
+
+    private void renameEach(Node operand, String[] params) throws Exception {
         String[] relAttrs = operand.getAttributes();
         if (relAttrs.length != params.length) {
             throw new Exception("Number of attributes to rename does not match original number of attributes.");
         }
-        operand.setAttributes(params);
-        return operand;
+        setAttributes(params);
+    }
+
+    private void duplicateElimination(Node operand) throws Exception {
+        if (operand.getOperator() != Operator.PI) {
+            throw new Exception("Can only eliminate duplicates after projection.");
+        }
+    }
+
+    public int getNumDescendants() {
+        return 1 + operand.getNumDescendants();
+    }
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public String[] getParams() {
+        return params;
     }
 
     public String[] getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(String[] newAttrs) {
+    private void setAttributes(String[] newAttrs) {
         attributes = newAttrs;
+    }
+
+    //TODO enforce stricter checks on GROUP BY i.e. not part of a separate subquery, satisfying grouping condition
+    public Node locateGroupBy() {
+        if (operator.equals(Operator.GAMMA)) {
+            return this;
+        }
+        return operand.locateGroupBy();
     }
 
     @Override
     public String toString() {
-        if (operator == Operator.IDENTITY) {
-            return String.join(",", attributes);
-        }
         if (params.length > 0) {
-            return String.format("%s_%s(%s)", operator.toString(), String.join(",", params), operand.toString());
+            return String.format("%s#%s#%s", operator.toString(), String.join(",", params), operand.toString());
         }
-        return String.format("%s(%s)", operator.toString(), operand.toString());
+        return String.format("%s#%s", operator.toString(), operand.toString());
     }
 }

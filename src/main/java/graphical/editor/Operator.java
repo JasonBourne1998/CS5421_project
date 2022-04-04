@@ -2,17 +2,17 @@ package graphical.editor;
 
 public enum Operator {
     IDENTITY(""),
-    SIGMA("\u03C3"), // lowercase sigma
-    PI("\u03C0"), // lowercase pi
-    RHO("\u03C1"), // lowercase rho
-    TAU("\u03C4"), // lowercase tau
-    DELTA("\u03B4"), // lowercase delta
-    GAMMA("\u03B3"), // lowercase gamma
-    CROSS("\uFF38"), // fullwidth capital X
-    DIFFERENCE("\u2014"), // em dash
-    UNION("\u222A"), // union symbol
-    INTERSECTION("\u2229"), // intersection symbol
-    INNER_JOIN("\u2A1D"); // large bowtie
+    SIGMA("sigma"), // lowercase sigma
+    PI("pi"), // lowercase pi
+    RHO("rho"), // lowercase rho
+    TAU("tau"), // lowercase tau
+    DELTA("delta"), // lowercase delta
+    GAMMA("gamma"), // lowercase gamma
+    CROSS("cross"), // fullwidth capital X
+    DIFFERENCE("diff"), // em dash
+    UNION("union"), // union symbol
+    INTERSECTION("intersection"), // intersection symbol
+    INNER_JOIN("innerjoin"); // large bowtie
 
     private final String label;
 

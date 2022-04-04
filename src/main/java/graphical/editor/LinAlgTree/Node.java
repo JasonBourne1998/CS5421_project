@@ -1,10 +1,15 @@
 package graphical.editor.LinAlgTree;
 
+import graphical.editor.Operator;
+
 /***
  * Interface that represents a node in the tree.
  */
 public interface Node {
-    Node evaluate() throws Exception;
+    void evaluate() throws Exception;
+    int getNumDescendants();
+    Operator getOperator();
     String[] getAttributes();
-    void setAttributes(String[] attributes);
+    String[] getParams();
+    Node locateGroupBy();
 }
