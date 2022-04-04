@@ -19,40 +19,43 @@ public class BinaryOperation implements Node {
     }
 
     public BinaryOperation(Operator op, Node leftNode, Node rightNode, String[] args) throws Exception {
-        leftOperand = leftNode.evaluate();
-        rightOperand = rightNode.evaluate();
+        leftOperand = leftNode;
+        rightOperand = rightNode;
         operator = op;
         params = args;
+        evaluate();
     }
 
-    public Node evaluate() throws Exception {
+    public void evaluate() throws Exception {
         switch (operator) {
         case CROSS:
-            return cross(leftOperand, rightOperand);
+            cross(leftOperand, rightOperand);
+            break;
         case INNER_JOIN:
-            return innerJoin(leftOperand, rightOperand, params);
+            innerJoin(leftOperand, rightOperand, params);
+            break;
         case UNION:
             // fallthrough
         case INTERSECTION:
             // fallthrough
         case DIFFERENCE:
-            return checkMatchingAttributes(leftOperand, rightOperand);
+            checkMatchingAttributes(leftOperand, rightOperand);
+            break;
         }
-        return null;
+        throw new Exception("Invalid operator.");
     }
 
-    private Node cross(Node leftNode, Node rightNode) {
+    private void cross(Node leftNode, Node rightNode) {
         String[] leftAttributes = leftNode.getAttributes();
         String[] rightAttributes = rightNode.getAttributes();
         int combinedLength = leftAttributes.length + rightAttributes.length;
         String[] combinedAttributes = Arrays.copyOf(leftAttributes, combinedLength);
         System.arraycopy(rightAttributes, 0, combinedAttributes, leftAttributes.length, rightAttributes.length);
-        leftNode.setAttributes(combinedAttributes);
-        return leftNode;
+        setAttributes(combinedAttributes);
     }
 
-    private Node innerJoin(Node leftNode, Node rightNode, String[] args) throws Exception {
-        String[][] joinPredicates = parsePredicates(args);
+    private void innerJoin(Node leftNode, Node rightNode, String[] args) throws Exception {
+        String[][] joinPredicates = Parser.parsePredicates(args);
         String[] leftAttributes = leftNode.getAttributes();
         String[] rightAttributes = rightNode.getAttributes();
         for (String[] p : joinPredicates) {
@@ -71,11 +74,10 @@ public class BinaryOperation implements Node {
                 .filter(attr -> Arrays.stream(filterAttributes)
                         .noneMatch(f -> f.equalsIgnoreCase(attr)))
                 .toArray(String[]::new);
-        leftNode.setAttributes(combinedAttributes);
-        return leftNode;
+        setAttributes(combinedAttributes);
     }
 
-    private Node checkMatchingAttributes(Node leftNode, Node rightNode) throws Exception {
+    private void checkMatchingAttributes(Node leftNode, Node rightNode) throws Exception {
         String[] leftAttributes = leftNode.getAttributes();
         String[] rightAttributes = rightNode.getAttributes();
         int l = leftAttributes.length;
@@ -84,42 +86,43 @@ public class BinaryOperation implements Node {
             throw new Exception("Unable to UNION: Number of attributes of each relation does not match.");
         }
         //TODO enforce check of matching column types
-        return leftNode;
     }
 
-    private String[][] parsePredicates(String[] args) throws InputException {
-        String[][] output = Arrays.stream(args)
-                .map(this::parsePredicate)
-                .toArray(String[][]::new);
-
-        return output;
+    public int getNumDescendants() {
+        return 2 + leftOperand.getNumDescendants() + rightOperand.getNumDescendants();
     }
 
-    private String[] parsePredicate(String arg) throws InputException {
-        // split parameters by whitespace
-        String[] predicate = arg.split("[ \t\r\n]+");
-        if (predicate.length != 3) {
-            throw new InputException(String.format("Unable to parse join attributes %s", arg));
-        }
-        return predicate;
+    public Operator getOperator() {
+        return operator;
+    }
 
+    public String[] getParams() {
+        return params;
     }
 
     public String[] getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(String[] attrs) {
+    private void setAttributes(String[] attrs) {
         attributes = attrs;
+    }
+
+    public Node locateGroupBy() {
+        Node groupBy = leftOperand.locateGroupBy();
+        if (groupBy == null) {
+            groupBy = rightOperand.locateGroupBy();
+        }
+        return groupBy;
     }
 
     @Override
     public String toString() {
         if (params.length > 0) {
-            return String.format("(%s %s_{%s} %s)", leftOperand.toString(), operator.toString(),
+            return String.format("%s#%s#%s#%s)", operator.toString(),
                     String.join("\u028C", params), // caret symbol (^)--assume all conditions are conjunctive
-                    rightOperand.toString());
+                    leftOperand.toString(), rightOperand.toString());
         }
-        return String.format("(%s %s %s)", leftOperand.toString(), operator.toString(), rightOperand.toString());
+        return String.format("%s#%s#%s)", operator.toString(), leftOperand.toString(), rightOperand.toString());
     }
 }
