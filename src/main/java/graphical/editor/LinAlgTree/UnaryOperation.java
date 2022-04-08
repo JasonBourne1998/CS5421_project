@@ -4,6 +4,7 @@ import graphical.editor.DuplicateColumnException;
 import graphical.editor.Operator;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class UnaryOperation implements Node {
     private Node operand;
@@ -42,17 +43,23 @@ public class UnaryOperation implements Node {
             duplicateElimination(operand);
             break;
         case SIGMA:
-            if (Parser.detectAggregateFunctions(params)) {
-                Node groupBy = locateGroupBy();
-                //TODO HAVING clause
-            } else {
+//            if (Parser.detectAggregateFunctions(params)) {
+//                Node groupBy = locateGroupBy();
+//                selectHaving(operand, params);
+//                //TODO HAVING clause
+//            } else {
+            selectWhere(operand, params);
                 //TODO WHERE clause
-            }
+//            }
             break;
         case TAU:
             orderBy(operand, params);
             break;
         //TODO case SIGMA, case GAMMA
+
+            case GAMMA:
+                groupBy(operand, params);
+                break;
         }
         throw new Exception("Invalid operator.");
     }
@@ -69,6 +76,47 @@ public class UnaryOperation implements Node {
             throw new Exception("Attributes not present in the schema.");
         }
         attributes = params;
+    }
+
+    private void selectWhere(Node operand, String[] params) throws Exception {
+        if (!checkAttributesPresent(operand, params)) {
+            throw new Exception("Attributes not present in the schema.");
+        }
+        attributes = params;
+    }
+
+    private void groupBy(Node operand, String[] params) throws Exception {
+        if (!checkAttributesPresent(operand, params)) {
+            throw new Exception("Attributes not present in the schema.");
+        }
+
+        // Loop through params, find following 3 kinds of attributes, split them
+        ArrayList<String> groupBy = new ArrayList<String>();
+        ArrayList<String> select = new ArrayList<String>();
+        ArrayList<String> having = new ArrayList<String>();
+
+        // Check for HAVING first, then SELECT, because aggregate functions can both be in HAVING and SELECT, but only HAVING params have condition
+        for(String i : params){
+            if (i.contains("<") || i.contains(">") || i.contains("=")){
+                having.add(i);
+            } else if (Parser.detectAggregateFunctions(i)) {
+                select.add(i);
+            } else {
+                groupBy.add(i);
+            }
+        }
+
+        // Add separator, expected output format: GAMMA # groupBy @ select @ having
+        groupBy.add("@");
+        select.add("@");
+        ArrayList<String> combined = new ArrayList<String>();
+        combined.addAll(groupBy);
+        combined.addAll(select);
+        combined.addAll(having);
+
+        // convert to attributes array
+        String[] newAttributes = combined.toArray(new String[combined.size()]);
+        setAttributes(newAttributes);
     }
 
     private void orderBy(Node operand, String[] params) throws Exception {

@@ -29,4 +29,8 @@ public class Parser {
         return Arrays.stream(args)
                 .anyMatch(arg -> arg.toLowerCase().matches(AGG_REGEX_MATCHER));
     }
+
+    public static boolean detectAggregateFunctions(String s) {
+        return s.matches(AGG_REGEX_MATCHER);
+    }
 }
