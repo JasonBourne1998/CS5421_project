@@ -18,11 +18,6 @@ public class MainTree {
         numLayers = 0;
     }
 
-    private void addLayer() {
-        layers.add(new ArrayList<>());
-        numLayers++;
-    }
-
     /***
      * Adds a leaf node in the specified layer if possible, creating at most one additional layer if required.
      *
@@ -121,9 +116,26 @@ public class MainTree {
         }
     }
 
+    private void addLayer() {
+        layers.add(new ArrayList<>());
+        numLayers++;
+    }
+
     private void dropLayer() {
         assert(layers.get(numLayers - 1).isEmpty());
         layers.remove(numLayers - 1);
+        numLayers--;
+    }
+
+    private void addFirstLayer() {
+        layers.add(0, new ArrayList<>());
+        numLayers++;
+    }
+
+    private void dropFirstLayer() {
+        assert(layers.get(0).isEmpty());
+        layers.remove(0);
+        numLayers--;
     }
 
     private boolean isConnected() {

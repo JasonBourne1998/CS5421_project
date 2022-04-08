@@ -32,189 +32,181 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="545.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+
+<fx:root type="Scene" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApp.java">
+   <root>
+      <AnchorPane fx:id="mainWindow" maxHeight="-1.0" maxWidth="-1.0" prefHeight="545.0" prefWidth="776.0">
       <children>
-        <Label alignment="CENTER" layoutX="239.0" layoutY="233.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
-            <SplitPane dividerPositions="0.1279926335174954" orientation="VERTICAL" prefHeight="545.0" prefWidth="776.0">
+            <SplitPane fx:id="splitWindow" dividerPositions="0.049723756906077346" orientation="VERTICAL" prefHeight="545.0" prefWidth="776.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane fx:id="topFrame" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <HBox layoutX="34.0" layoutY="24.0" />
-                        <VBox layoutX="387.0" layoutY="41.0" />
-                        <VBox layoutX="34.0" layoutY="12.0">
+                        <StackPane prefHeight="67.0" prefWidth="774.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label text="Input" />
-                              <TextField prefHeight="25.0" prefWidth="186.0" promptText="Enter relations here e.g. R(A,B,C)" />
+                              <MenuBar StackPane.alignment="TOP_LEFT">
+                                <menus>
+                                  <Menu mnemonicParsing="false" text="File">
+                                    <items>
+                                          <MenuItem mnemonicParsing="false" text="New" />
+                                      <MenuItem mnemonicParsing="false" text="Close" />
+                                    </items>
+                                  </Menu>
+                                  <Menu mnemonicParsing="false" text="Edit">
+                                    <items>
+                                      <MenuItem mnemonicParsing="false" text="Add Layer" />
+                                          <MenuItem mnemonicParsing="false" text="Add Base Layer" />
+                                          <MenuItem mnemonicParsing="false" text="Delete Layer" />
+                                    </items>
+                                  </Menu>
+                                  <Menu mnemonicParsing="false" text="Help">
+                                    <items>
+                                      <MenuItem mnemonicParsing="false" text="About" />
+                                    </items>
+                                  </Menu>
+                                </menus>
+                              </MenuBar>
                            </children>
-                        </VBox>
-                        <Button layoutX="265.0" layoutY="28.0" mnemonicParsing="false" text="Generate SQL Query" />
+                        </StackPane>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane fx:id="bottomFrame" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <SplitPane dividerPositions="0.07901554404145078, 0.8238341968911918" layoutX="-1.0" prefHeight="455.0" prefWidth="774.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="lowerVSplitPane" dividerPositions="0.07901554404145078, 0.8238341968911918" layoutX="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="52.0">
+                            <AnchorPane fx:id="operatorsContainer" minHeight="0.0" minWidth="0.0">
                                  <children>
-                                    <VBox prefHeight="453.0" prefWidth="58.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <VBox fx:id="operatorsToolbar" prefHeight="453.0" prefWidth="58.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label text="Operators" />
-                                          <StackPane prefHeight="38.0" prefWidth="58.0">
+                                          <Label fx:id="operatorsToolbarLabel" text="Operators" />
+                                          <StackPane fx:id="sigmaBox" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="σ" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="sigmaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="σ" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="piBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="π" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="piButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="π" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="rhoBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="ρ" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="rhoButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="ρ" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="tauBox" layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="τ" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="tauButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="τ" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="deltaBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="δ" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="deltaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="δ" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="gammaBox" layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="γ" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="gammaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="γ" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="103.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="crossBox" layoutX="10.0" layoutY="103.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="X" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="crossButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="X" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="141.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="diffBox" layoutX="10.0" layoutY="141.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="-" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="diffButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="-" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="unionBox" layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∪" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="unionButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∪" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="intersectBox" layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∩" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="intersectButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∩" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane layoutX="10.0" layoutY="331.0" prefHeight="38.0" prefWidth="58.0">
+                                          <StackPane fx:id="innerjoinBox" layoutX="10.0" layoutY="331.0" prefHeight="38.0" prefWidth="58.0">
                                              <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="⋈" textAlignment="CENTER" textOverrun="CLIP" />
+                                                <Button fx:id="innerjoinButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="⋈" textAlignment="CENTER" textOverrun="CLIP" />
                                              </children>
                                           </StackPane>
-                                          <StackPane prefHeight="38.0" prefWidth="58.0" />
+                                          <StackPane fx:id="emptyBox" prefHeight="38.0" prefWidth="58.0" />
                                        </children>
                                     </VBox>
                                  </children>
                               </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="405.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
                                  <children>
-                                    <ScrollPane layoutX="106.0" layoutY="27.0" prefHeight="453.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="467.0" prefWidth="557.0">
+                                    <SplitPane dividerPositions="0.7510729613733905" orientation="VERTICAL" prefHeight="511.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <items>
+                                          <ScrollPane>
+                                             <content>
+                                                <VBox />
+                                             </content>
+                                          </ScrollPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="141.0" prefWidth="566.0">
                                              <children>
-                                                <VBox layoutX="121.0" layoutY="57.0" prefHeight="468.0" prefWidth="557.0" AnchorPane.bottomAnchor="-27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                <SplitPane dividerPositions="0.6388888888888888" orientation="VERTICAL" prefHeight="452.0" prefWidth="568.0">
-                                                   <items>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="566.0">
-                                                         <children>
-                                                            <StackPane prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;">
-                                                               <children>
-                                                                  <Circle fill="#1f93ff00" radius="14.0" stroke="BLACK" strokeType="INSIDE" translateX="-55.0" />
-                                                                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="150.0" promptText="Operands" translateX="55.0" />
-                                                                  <Label text="Click the circle, then choose operators" translateX="-180.0" />
-                                                               </children>
-                                                            </StackPane>
-                                                            <Separator layoutY="37.0" prefHeight="2.0" prefWidth="568.0" />
-                                                            <StackPane layoutY="40.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;">
-                                                               <children>
-                                                                  <SplitPane dividerPositions="0.4991166077738516" prefHeight="160.0" prefWidth="200.0">
-                                                                    <items>
-                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                                           <children>
-                                                                              <Circle fill="#1f93ff00" layoutX="71.0" layoutY="18.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-                                                                              <TextField layoutX="100.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="150.0" promptText="Operands" />
-                                                                           </children>
-                                                                        </AnchorPane>
-                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                                           <children>
-                                                                              <Circle fill="#1f93ff00" layoutX="51.0" layoutY="17.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-                                                                              <TextField layoutX="77.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="150.0" promptText="Operands" />
-                                                                           </children>
-                                                                        </AnchorPane>
-                                                                    </items>
-                                                                  </SplitPane>
-                                                               </children>
-                                                            </StackPane>
-                                                            <Separator layoutY="77.0" prefHeight="2.0" prefWidth="568.0" />
-                                                            <StackPane layoutX="-1.0" layoutY="80.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
-                                                            <Separator layoutX="-1.0" layoutY="117.0" prefHeight="2.0" prefWidth="568.0" />
-                                                            <StackPane layoutX="-1.0" layoutY="120.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
-                                                            <Separator layoutX="-1.0" layoutY="157.0" prefHeight="2.0" prefWidth="568.0" />
-                                                            <StackPane layoutY="160.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
-                                                            <Separator layoutY="197.0" prefHeight="2.0" prefWidth="568.0" />
-                                                            <StackPane layoutY="200.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
-                                                            <Separator layoutY="237.0" prefHeight="2.0" prefWidth="568.0" />
-                                                            <StackPane layoutX="-1.0" layoutY="240.0" prefHeight="38.0" prefWidth="568.0" style="-fx-background-color: #e9e9e9;" />
-                                                            <Separator layoutX="-1.0" layoutY="277.0" prefHeight="2.0" prefWidth="568.0" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="141.0" prefWidth="566.0">
-                                                         <children>
-                                                            <VBox prefHeight="162.0" prefWidth="568.0">
-                                                               <children>
-                                                                  <Label text="SQL Output" />
-                                                                  <ListView prefHeight="200.0" prefWidth="200.0" />
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                      </AnchorPane>
-                                                   </items>
-                                                </SplitPane>
+                                                <VBox prefHeight="113.0" prefWidth="567.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Label text="SQL Output" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The SQL query will be displayed here." />
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </AnchorPane>
-                                      </content>
-                                    </ScrollPane>
+                                       </items>
+                                    </SplitPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane prefHeight="453.0" prefWidth="92.0">
+                              <AnchorPane>
                                  <children>
-                                    <VBox>
+                                    <VBox prefHeight="479.0" prefWidth="133.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label text="Relations" />
-                                          <ListView prefHeight="437.0" prefWidth="133.0" />
+                                          <StackPane>
+                                             <children>
+                                                <Label text="Edit Relations here" />
+                                             </children>
+                                          </StackPane>
+                                          <TableView fx:id="tableView" editable="true">
+                                            <columns>
+                                              <TableColumn fx:id="relationTable" minWidth="-1.0" prefWidth="75.0" text="tbl_name([attr]*)" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                          <SplitPane dividerPositions="0.5">
+                                             <items>
+                                                <StackPane>
+                                                   <children>
+                                                      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add" />
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete" />
+                                                   </children>
+                                                </StackPane>
+                                             </items>
+                                          </SplitPane>
                                        </children>
                                     </VBox>
                                  </children>
@@ -226,6 +218,6 @@
               </items>
             </SplitPane>
       </children>
-    </AnchorPane>
-  </children>
-</VBox>
+      </AnchorPane>
+   </root>
+</fx:root>
