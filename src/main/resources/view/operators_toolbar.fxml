@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="graphical.editor.OperatorsToolbar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <Label fx:id="operatorsToolbarLabel" text="Operators" />
+    <StackPane fx:id="sigmaBox" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="sigmaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="σ" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="selection" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="piBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="piButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="π" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="projection" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="rhoBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="rhoButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="ρ" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="renaming" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="tauBox" layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="tauButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="τ" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="order by" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="deltaBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="deltaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="δ" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="duplicate elimination (distinct)" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="gammaBox" layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="gammaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="γ" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="group by (aggregation)" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="crossBox" layoutX="10.0" layoutY="103.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="crossButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="X" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="cross join" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="diffBox" layoutX="10.0" layoutY="141.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="diffButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="-" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="set difference" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="unionBox" layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="unionButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∪" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="union" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="intersectBox" layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="intersectButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∩" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="intersection" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="innerjoinBox" layoutX="10.0" layoutY="331.0" prefHeight="38.0" prefWidth="58.0">
+      <children>
+        <Button fx:id="innerjoinButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="⋈" textAlignment="CENTER" textOverrun="CLIP">
+          <tooltip>
+            <Tooltip text="inner join" />
+          </tooltip></Button>
+      </children>
+    </StackPane>
+    <StackPane fx:id="emptyBox" prefHeight="38.0" prefWidth="58.0" />
+  </children>
+</fx:root>

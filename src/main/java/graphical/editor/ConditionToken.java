@@ -9,8 +9,8 @@ public enum ConditionToken {
     EQ("="),
     AND("&"),
     OR("|"),
-    IS_NULL("IS NULL"),
-    IS_NOT_NULL("IS NOT NULL");
+    IS_NULL("IS_NULL"),
+    IS_NOT_NULL("IS_NOT_NULL");
     //TODO add IN, NOT IN, EXISTS, NOT EXISTS
 
     private final String label;

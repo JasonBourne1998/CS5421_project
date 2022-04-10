@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public class LeafNode implements Node {
     private String[] attributes;
+    private final String name;
 
     public LeafNode(String relation) throws DuplicateColumnException {
         String[] nameAndAttributes = relation.strip().split("\\)")[0].split("\\(");
@@ -18,6 +19,7 @@ public class LeafNode implements Node {
         attributes = Arrays.stream(attributes)
                 .map(attr -> String.format("%s.%s", tableName, attr))
                 .toArray(String[]::new);
+        name = relation;
     }
 
     public void evaluate() {
@@ -41,7 +43,15 @@ public class LeafNode implements Node {
     }
 
     public String[] getParams() {
-        return null;
+        return new String[0];
+    }
+
+    public String getParamString() {
+        return name;
+    }
+
+    public String toGraphString() {
+        return name;
     }
 
     @Override

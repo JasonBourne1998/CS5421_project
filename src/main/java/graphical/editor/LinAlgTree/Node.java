@@ -11,5 +11,7 @@ public interface Node {
     Operator getOperator();
     String[] getAttributes();
     String[] getParams();
+    String getParamString();
     Node locateGroupBy();
+    String toGraphString();
 }

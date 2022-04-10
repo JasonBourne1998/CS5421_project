@@ -38,7 +38,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -47,7 +46,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
-
 
 <fx:root type="Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <scene>
@@ -61,21 +59,21 @@
                            <children>
                               <StackPane prefHeight="67.0" prefWidth="774.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <MenuBar StackPane.alignment="TOP_LEFT">
+                                    <MenuBar fx:id="menuBar" StackPane.alignment="TOP_LEFT">
                                       <menus>
-                                        <Menu mnemonicParsing="false" text="File">
+                                        <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
                                           <items>
-                                                <MenuItem mnemonicParsing="false" text="New" />
-                                                <MenuItem mnemonicParsing="false" text="Generate SQL Query" />
-                                            <MenuItem mnemonicParsing="false" text="Close" />
+                                            <MenuItem fx:id="newButton" mnemonicParsing="false" text="New" />
+                                            <MenuItem fx:id="sqlButton" mnemonicParsing="false" text="Generate SQL Query" />
+                                            <MenuItem fx:id="closeButton" mnemonicParsing="false" text="Close" />
                                           </items>
                                         </Menu>
-                                        <Menu mnemonicParsing="false" text="Edit">
+                                        <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
                                           <items>
-                                            <MenuItem mnemonicParsing="false" text="Add Layer" />
-                                                <MenuItem mnemonicParsing="false" text="Add Base Layer" />
-                                                <MenuItem mnemonicParsing="false" text="Delete Layer" />
-                                                <MenuItem mnemonicParsing="false" text="Delete Base Layer" />
+                                            <MenuItem fx:id="addLayerButton" mnemonicParsing="false" text="Add Layer" />
+                                            <MenuItem fx:id="addBaseLayerButton" mnemonicParsing="false" text="Add Base Layer" />
+                                            <MenuItem fx:id="deleteLayerButton" mnemonicParsing="false" text="Delete Layer" />
+                                            <MenuItem fx:id="deleteBaseLayerButton" mnemonicParsing="false" text="Delete Base Layer" />
                                           </items>
                                         </Menu>
                                         <Menu mnemonicParsing="false" text="Help">
@@ -93,83 +91,15 @@
                            <children>
                               <SplitPane fx:id="lowerVSplitPane" dividerPositions="0.07901554404145078, 0.8238341968911918" layoutX="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
-                                  <AnchorPane fx:id="operatorsContainer" minHeight="0.0" minWidth="0.0">
-                                       <children>
-                                          <VBox fx:id="operatorsToolbar" prefHeight="453.0" prefWidth="58.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <Label fx:id="operatorsToolbarLabel" text="Operators" />
-                                                <StackPane fx:id="sigmaBox" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="sigmaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="σ" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="piBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="piButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="π" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="rhoBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="rhoButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="ρ" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="tauBox" layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="tauButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="τ" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="deltaBox" layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="deltaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="δ" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="gammaBox" layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="gammaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="γ" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="crossBox" layoutX="10.0" layoutY="103.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="crossButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="X" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="diffBox" layoutX="10.0" layoutY="141.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="diffButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="-" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="unionBox" layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="unionButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∪" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="intersectBox" layoutX="10.0" layoutY="293.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="intersectButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="∩" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="innerjoinBox" layoutX="10.0" layoutY="331.0" prefHeight="38.0" prefWidth="58.0">
-                                                   <children>
-                                                      <Button fx:id="innerjoinButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" text="⋈" textAlignment="CENTER" textOverrun="CLIP" />
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane fx:id="emptyBox" prefHeight="38.0" prefWidth="58.0" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
+                                  <AnchorPane fx:id="operatorsContainer" minHeight="0.0" minWidth="0.0" />
                                   <AnchorPane minHeight="0.0" minWidth="0.0">
                                        <children>
                                           <SplitPane dividerPositions="0.7510729613733905" orientation="VERTICAL" prefHeight="511.0" prefWidth="569.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
-                                                <ScrollPane>
-                                                   <content>
-                                                      <VBox />
-                                                   </content>
-                                                </ScrollPane>
+                                                <VBox fx:id="graphArea" style="-fx-background-color: #123124;" />
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="141.0" prefWidth="566.0">
                                                    <children>
-                                                      <VBox prefHeight="113.0" prefWidth="567.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <VBox fx:id="feedbackBox" prefHeight="113.0" prefWidth="567.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
                                                             <Label text="SQL Output" />
                                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The SQL query will be displayed here." />

@@ -3,6 +3,7 @@ package graphical.editor.LinAlgTree;
 import graphical.editor.InputException;
 import graphical.editor.Operator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -11,18 +12,21 @@ public class BinaryOperation implements Node {
     private Node rightOperand;
     private final Operator operator;
     private final String[] params;
+    private final String paramString;
     private String[] attributes;
 
-    public BinaryOperation(Operator op, String[] args) {
+    public BinaryOperation(Operator op, String argString, String[] args) {
         operator = op;
         params = args;
+        paramString = argString;
     }
 
-    public BinaryOperation(Operator op, Node leftNode, Node rightNode, String[] args) throws Exception {
+    public BinaryOperation(Operator op, Node leftNode, Node rightNode, String argString, String[] args) throws Exception {
         leftOperand = leftNode;
         rightOperand = rightNode;
         operator = op;
         params = args;
+        paramString = argString;
         evaluate();
     }
 
@@ -41,8 +45,9 @@ public class BinaryOperation implements Node {
         case DIFFERENCE:
             checkMatchingAttributes(leftOperand, rightOperand);
             break;
+        default:
+            throw new Exception("Invalid operator.");
         }
-        throw new Exception("Invalid operator.");
     }
 
     private void cross(Node leftNode, Node rightNode) {
@@ -55,20 +60,22 @@ public class BinaryOperation implements Node {
     }
 
     private void innerJoin(Node leftNode, Node rightNode, String[] args) throws Exception {
-        String[][] joinPredicates = Parser.parsePredicates(args);
+        ArrayList<ArrayList<String>> joinPredicates = Parser.parsePredicates(args);
         String[] leftAttributes = leftNode.getAttributes();
         String[] rightAttributes = rightNode.getAttributes();
-        for (String[] p : joinPredicates) {
-            assert(p.length == 3);
-            if (Arrays.stream(leftAttributes).noneMatch(x -> x.equalsIgnoreCase(p[0]))) {
-                throw new Exception(String.format("Attribute %s is not present in left relation.", p[0]));
+        for (ArrayList<String> p : joinPredicates) {
+            if (p.size() != 3) {
+                throw new Exception("Improper join condition(s) detected.");
             }
-            if (Arrays.stream(rightAttributes).noneMatch(y -> y.equalsIgnoreCase(p[1]))) {
-                throw new Exception(String.format("Attribute %s is not present in right relation.", p[2]));
+            if (Arrays.stream(leftAttributes).noneMatch(x -> x.equalsIgnoreCase(p.get(0)))) {
+                throw new Exception(String.format("Attribute %s is not present in left relation.", p.get(0)));
+            }
+            if (Arrays.stream(rightAttributes).noneMatch(y -> y.equalsIgnoreCase(p.get(1)))) {
+                throw new Exception(String.format("Attribute %s is not present in right relation.", p.get(2)));
             }
         }
-        String[] filterAttributes = Arrays.stream(joinPredicates)
-                .map(p -> p[1])
+        String[] filterAttributes = joinPredicates.stream()
+                .map(p -> p.get(2))
                 .toArray(String[]::new);
         String[] combinedAttributes = Stream.concat(Arrays.stream(leftAttributes), Arrays.stream(rightAttributes))
                 .filter(attr -> Arrays.stream(filterAttributes)
@@ -100,6 +107,10 @@ public class BinaryOperation implements Node {
         return params;
     }
 
+    public String getParamString() {
+        return paramString;
+    }
+
     public String[] getAttributes() {
         return attributes;
     }
@@ -124,5 +135,13 @@ public class BinaryOperation implements Node {
                     leftOperand.toString(), rightOperand.toString());
         }
         return String.format("%s#%s#%s)", operator.toString(), leftOperand.toString(), rightOperand.toString());
+    }
+
+    @Override
+    public String toGraphString() {
+        if (!paramString.isEmpty()) {
+            return String.format("%s\n%s", operator.toSymbol(), paramString);
+        }
+        return operator.toSymbol();
     }
 }
